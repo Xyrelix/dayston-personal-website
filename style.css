@@ -1,25 +1,39 @@
 /* Light mode */
 :root {
-  --bg-color: #ffffff;
+  --bg: linear-gradient(135deg, #cce7ff, #e6f2ff, #ffffff);
   --text-color: #222222;
+  --header-bg: linear-gradient(135deg, #7aa7f2, #5493e4);
 }
 
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-color: #121212;
+    --bg: linear-gradient(135deg, #0a0f1f, #1a2a40, #4da6ff);
     --text-color: #f5f5f5;
+    --header-bg: linear-gradient(135deg, #12213b, #1f3c70);
   }
+}
+
+body[data-theme="light"] {
+  --bg: linear-gradient(135deg, #cce7ff, #e6f2ff, #ffffff);
+  --text-color: #222222;
+  --header-bg: linear-gradient(135deg, #7aa7f2, #5493e4);
+}
+
+body[data-theme="dark"] {
+  --bg: linear-gradient(135deg, #0a0f1f, #1a2a40, #4da6ff);
+  --text-color: #f5f5f5;
+  --header-bg: linear-gradient(135deg, #12213b, #1f3c70);
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--bg-color);
+  background: var(--bg);
   color: var(--text-color);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   transition:
-    background-color 0.3s,
+    background 0.3s,
     color 0.3s;
   position: relative;
   min-height: 100vh;
@@ -32,24 +46,7 @@ body {
   z-index: -1;
   pointer-events: none;
   overflow: hidden;
-  background-image:
-    url("https://copilot.microsoft.com/th/id/BCO.1b0fd07e-5166-4440-b109-3ce31d1c448d.png"),
-    radial-gradient(circle at top left, rgba(0, 120, 215, 0.08), transparent 24%),
-    radial-gradient(circle at bottom right, rgba(0, 120, 215, 0.06), transparent 22%);
-  background-size: cover, 80%, 80%;
-  background-position: center, top left, bottom right;
-  background-repeat: no-repeat;
-  background-blend-mode: normal, screen, screen;
-}
-
-@media (prefers-color-scheme: dark) {
-  .background-tech {
-    background-image:
-      url("https://copilot.microsoft.com/th/id/BCO.f8d1c603-a242-41ef-b0dd-035ae211c6c7.png"),
-      radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 24%),
-      radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.06), transparent 22%);
-    background-blend-mode: normal, overlay, overlay;
-  }
+  background: transparent;
 }
 
 .background-tech .particle {
@@ -65,55 +62,133 @@ body {
   height: auto;
 }
 
+header p {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
 header {
-  background: rgba(51, 51, 51, 0.95);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--header-bg);
   color: white;
-  padding: 20px;
+  padding: 7px;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
-header nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.header-left {
   display: flex;
-  gap: 30px;
-  justify-content: center;
+  align-items: center;
+  gap: 25px;
 }
 
-header nav a {
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  /*padding: 10px 18px;*/
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  /*border: 2px solid rgba(255, 255, 255, 0.3);*/
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.dropdown-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--header-bg);
+  color: white;
+  list-style: none;
+  margin: 12px 0 0 0;
+  padding: 10px 0;
+  border-radius: 6px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.dropdown.active .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu li {
+  padding: 0;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 12px 24px;
   color: white;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s;
+  transition: background-color 0.2s;
 }
 
-header nav a:hover {
-  color: #0078d7;
+.dropdown-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  /*color: #0078d7;*/
 }
 
 button,
 .download-button {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
   background: #007acc;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 500px;
   text-decoration: none;
   cursor: pointer;
   transition:
     background-color 0.2s,
     transform 0.2s;
+  font-size: 1rem;
+}
+
+button,
+.dropdown-toggle {
+  padding: 10px 18px;
+  justify-content: center;
+}
+
+.theme-toggle {
+  margin-top: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 button:hover,
-.download-button:hover {
-  background: #005fa3;
+.download-button:hover,
+.theme-toggle:hover {
+  /*background: #005fa3;*/
   transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .greeting {
@@ -185,7 +260,7 @@ section {
 }
 
 .contact a {
-  color: #0078d7;
+  color: yellowgreen;
   text-decoration: none;
   font-weight: 500;
 }

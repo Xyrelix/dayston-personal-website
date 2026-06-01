@@ -75,12 +75,71 @@ function animateBackground() {
   window.requestAnimationFrame(animateBackground);
 }
 
+function getPreferredTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light' || savedTheme === 'dark') {
+    return savedTheme;
+  }
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+function updateThemeButton(button, theme) {
+  button.textContent = theme === 'dark' ? '🌙' : '🌞';
+  button.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+}
+
+function setTheme(theme, persist = true) {
+  document.body.dataset.theme = theme;
+  if (persist) {
+    localStorage.setItem('theme', theme);
+  }
+  const toggle = document.querySelector('.theme-toggle');
+  if (toggle) {
+    updateThemeButton(toggle, theme);
+  }
+}
+
+function toggleTheme() {
+  const currentTheme = document.body.dataset.theme === 'dark' ? 'dark' : 'light';
+  setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+}
+
 window.addEventListener('resize', () => {
   containerWidth = window.innerWidth;
   containerHeight = window.innerHeight;
 });
 
 window.addEventListener('DOMContentLoaded', () => {
+  const initialTheme = getPreferredTheme();
+  setTheme(initialTheme, false);
+
+  const themeToggle = document.querySelector('.theme-toggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', toggleTheme);
+  }
+
+  const dropdownToggle = document.querySelector('.dropdown-toggle');
+  const dropdown = document.querySelector('.dropdown');
+  if (dropdownToggle && dropdown) {
+    dropdownToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle('active');
+    });
+
+    const dropdownLinks = dropdown.querySelectorAll('.dropdown-menu a');
+    dropdownLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        dropdown.classList.remove('active');
+      });
+    });
+  }
+
+  document.addEventListener('click', (e) => {
+    if (dropdown && !dropdown.contains(e.target)) {
+      dropdown.classList.remove('active');
+    }
+  });
+
   initBackground();
   animateBackground();
 });
