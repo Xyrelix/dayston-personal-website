@@ -20,3 +20,64 @@ button {
   border: none;
   cursor: pointer;
 }
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+/* Light mode */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #222222;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #121212;
+    --text-color: #f5f5f5;
+  }
+}
+
+.greeting {
+  text-align: center;
+}
+
+.greeting h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.greeting h2 {
+  font-size: 4rem;
+  margin: 0;
+  font-weight: bold;
+  color: #0078d7; /* Accent color for your name */
+}
+
+.social-links {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+}
