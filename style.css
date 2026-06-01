@@ -206,6 +206,14 @@ button:hover,
   margin: 0;
   font-weight: bold;
   color: #0078d7;
+  font-family: cursive;
+}
+
+.greeting h3 {
+  font-size: 0.9rem;
+  margin: 20px 0 0 0;
+  color: yellowgreen;
+  font-style: italic;
 }
 
 main,
@@ -285,4 +293,12 @@ section {
 
 .icon:hover {
   transform: scale(1.2);
+}
+
+section img {
+  width: 150px;
+  height: 150px;
+  transition: transform 0.3s;
+  border-type: elliptical;
+  border-radius: 50%;
 }
