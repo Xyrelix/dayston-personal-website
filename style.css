@@ -21,10 +21,52 @@ body {
   transition:
     background-color 0.3s,
     color 0.3s;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.background-tech {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background-image:
+    url("https://copilot.microsoft.com/th/id/BCO.1b0fd07e-5166-4440-b109-3ce31d1c448d.png"),
+    radial-gradient(circle at top left, rgba(0, 120, 215, 0.08), transparent 24%),
+    radial-gradient(circle at bottom right, rgba(0, 120, 215, 0.06), transparent 22%);
+  background-size: cover, 80%, 80%;
+  background-position: center, top left, bottom right;
+  background-repeat: no-repeat;
+  background-blend-mode: normal, screen, screen;
+}
+
+@media (prefers-color-scheme: dark) {
+  .background-tech {
+    background-image:
+      url("https://copilot.microsoft.com/th/id/BCO.f8d1c603-a242-41ef-b0dd-035ae211c6c7.png"),
+      radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 24%),
+      radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.06), transparent 22%);
+    background-blend-mode: normal, overlay, overlay;
+  }
+}
+
+.background-tech .particle {
+  position: absolute;
+  will-change: transform, opacity;
+  opacity: 0.14;
+  filter: saturate(0.9) brightness(1.2);
+}
+
+.background-tech .particle img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 header {
-  background: #333;
+  background: rgba(51, 51, 51, 0.95);
   color: white;
   padding: 20px;
   position: sticky;
