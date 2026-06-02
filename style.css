@@ -1,6 +1,6 @@
 /* Light mode */
 :root {
-  --bg: linear-gradient(135deg, #cce7ff, #e6f2ff, #ffffff);
+  --about-me: linear-gradient(135deg, #cce7ff, #e6f2ff, #ffffff);
   --text-color: #222222;
   --header-bg: linear-gradient(135deg, #7aa7f2, #5493e4);
 }
@@ -15,7 +15,8 @@
 }
 
 body[data-theme="light"] {
-  --bg: linear-gradient(135deg, #cce7ff, #e6f2ff, #ffffff);
+  /*--about-me: linear-gradient(135deg, #cce7ff, #e6f2ff, #ffffff);*/
+  --bg: hsla(42, 29.41%, 93.33%, 1);
   --text-color: #222222;
   --header-bg: linear-gradient(135deg, #7aa7f2, #5493e4);
 }
