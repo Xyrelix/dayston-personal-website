@@ -161,11 +161,15 @@ img {
   border: 1px solid var(--border);
   border-radius: 8px;
   cursor: pointer;
-  font-size: 1.1rem;
   color: var(--text);
   transition:
     background 0.2s,
     border-color 0.2s;
+}
+
+.theme-toggle {
+  position: relative;
+  font-size: 0;
 }
 
 .theme-toggle:hover,
@@ -180,9 +184,12 @@ img {
 
 .sun-icon,
 .moon-icon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .sun-icon {
@@ -330,7 +337,7 @@ body[data-theme="dark"] .moon-icon {
 
 /* ===== SECTIONS ===== */
 .about,
-.skills,
+.stack,
 .contact {
   padding: 100px 32px;
 }
@@ -340,7 +347,7 @@ body[data-theme="dark"] .moon-icon {
   background: var(--bg-alt);
 }
 
-.skills {
+.stack {
   background: var(--bg);
 }
 
@@ -650,7 +657,7 @@ github-text {
   }
 
   .about,
-  .skills,
+  .stack,
   .projects,
   .contact {
     padding: 70px 20px;

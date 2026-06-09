@@ -82,7 +82,6 @@ function getPreferredTheme() {
 }
 
 function updateThemeButton(btn, theme) {
-  btn.textContent = theme === 'dark' ? '🌙' : '🌞';
   btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
 }
 
