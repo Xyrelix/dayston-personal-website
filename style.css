@@ -178,6 +178,31 @@ img {
   display: none;
 }
 
+.sun-icon,
+.moon-icon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+
+.sun-icon {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.moon-icon {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+body[data-theme="dark"] .sun-icon {
+  opacity: 0;
+}
+
+body[data-theme="dark"] .moon-icon {
+  opacity: 1;
+}
+
 /* ===== BUTTONS ===== */
 .btn {
   display: inline-flex;
