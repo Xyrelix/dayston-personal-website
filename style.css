@@ -384,22 +384,42 @@ body[data-theme="dark"] .moon-icon {
 
 /* ===== SKILLS GRID ===== */
 .tech-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
   margin-top: 44px;
+}
+
+.languages,
+.frameworks,
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.tech-category {
+  flex-basis: 100%;
+  margin: 0 0 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 .tech-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
-  padding: 28px 20px;
+  gap: 10px;
+  padding: 20px 18px;
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   text-align: center;
+  min-width: 90px;
   transition:
     transform 0.2s,
     box-shadow 0.2s,
@@ -413,14 +433,14 @@ body[data-theme="dark"] .moon-icon {
 }
 
 .tech-icon {
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   object-fit: contain;
   display: block;
 }
 
 .tech-card span {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--text-muted);
   letter-spacing: 0.01em;
@@ -664,8 +684,18 @@ github-text {
   }
 
   .tech-grid {
-    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 14px;
+    gap: 28px;
+  }
+
+  .languages,
+  .frameworks,
+  .tools {
+    gap: 10px;
+  }
+
+  .tech-card {
+    min-width: 78px;
+    padding: 16px 14px;
   }
 
   .site-footer {
