@@ -15,6 +15,8 @@
   --radius: 12px;
   --max-w: 1100px;
   --nav-h: 64px;
+  --sparkles-first-color: #ffd700; /* gold */
+  --sparkles-second-color: #00ffff; /* cyan */
 }
 
 body[data-theme="dark"] {
@@ -716,5 +718,41 @@ github-text {
   .btn {
     width: 100%;
     max-width: 260px;
+  }
+}
+
+.sparkles-text {
+  font-size: 3.75rem; /* text-6xl */
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+}
+
+.sparkles-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.sparkle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0;
+  animation: sparkleAnim 0.8s infinite;
+  color: #ffffff;
+}
+
+@keyframes sparkleAnim {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(75deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(120deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(150deg);
   }
 }
