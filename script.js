@@ -150,6 +150,82 @@ function initThemeToggle() {
   setTheme(theme, false);
 }
 
+/* ===== ANIMATED NAV TABS ===== */
+function initAnimatedNav() {
+  const nav = document.getElementById('nav-links');
+  if (!nav) return;
+
+  const links = Array.from(nav.querySelectorAll('a'));
+
+  const indicator = document.createElement('span');
+  indicator.className = 'nav-indicator';
+  const hoverBg = document.createElement('span');
+  hoverBg.className = 'nav-hover-bg';
+  nav.appendChild(indicator);
+  nav.appendChild(hoverBg);
+
+  let activeLink = null;
+
+  function relRect(el) {
+    const nr = nav.getBoundingClientRect();
+    const er = el.getBoundingClientRect();
+    return { left: er.left - nr.left, top: er.top - nr.top, width: er.width, height: er.height };
+  }
+
+  function moveIndicator(link) {
+    const r = relRect(link);
+    if (r.width === 0) return;
+    indicator.style.left  = r.left + 'px';
+    indicator.style.width = r.width + 'px';
+    indicator.style.opacity = '1';
+  }
+
+  function setActive(link) {
+    links.forEach(l => l.classList.remove('nav-active'));
+    activeLink = link || null;
+    if (link) {
+      link.classList.add('nav-active');
+      moveIndicator(link);
+    } else {
+      indicator.style.opacity = '0';
+    }
+  }
+
+  // Hover background follows cursor between tabs
+  links.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      const r = relRect(link);
+      hoverBg.style.left    = r.left   + 'px';
+      hoverBg.style.top     = r.top    + 'px';
+      hoverBg.style.width   = r.width  + 'px';
+      hoverBg.style.height  = r.height + 'px';
+      hoverBg.style.opacity = '0.08';
+    });
+  });
+  nav.addEventListener('mouseleave', () => { hoverBg.style.opacity = '0'; });
+
+  // Click sets active immediately
+  links.forEach(link => link.addEventListener('click', () => setActive(link)));
+
+  // Scroll-based active tracking via IntersectionObserver
+  const sectionIds = links.map(l => l.getAttribute('href')?.replace('#', '')).filter(Boolean);
+  const visible = new Set();
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => e.isIntersecting ? visible.add(e.target.id) : visible.delete(e.target.id));
+    const topId = sectionIds.find(id => visible.has(id));
+    setActive(topId ? links.find(l => l.getAttribute('href') === '#' + topId) : null);
+  }, { threshold: 0.25 });
+
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+
+  // Reposition indicator when window resizes
+  window.addEventListener('resize', () => { if (activeLink) moveIndicator(activeLink); });
+}
+
 /* ===== MOBILE NAV ===== */
 function initNav() {
   const navToggle = document.querySelector('.nav-toggle');
@@ -189,6 +265,7 @@ window.addEventListener('resize', () => {
 window.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   initNav();
+  initAnimatedNav();
   initBackground();
   animateBackground();
 });
