@@ -721,38 +721,146 @@ github-text {
   }
 }
 
-.sparkles-text {
-  font-size: 3.75rem; /* text-6xl */
-  font-weight: bold;
+.get-in-touch {
   position: relative;
   display: inline-block;
+  padding: 12px 28px;
+  border: none;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
-.sparkles-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.sparkle {
+.get-in-touch::after {
   position: absolute;
-  pointer-events: none;
-  z-index: 20;
-  opacity: 0;
-  animation: sparkleAnim 0.8s infinite;
-  color: #ffffff;
+  content: "";
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 260px;
+  height: 100%;
+  background-color: #60a5fa;
+  background-image: linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%);
+  transition: all 0.3s ease;
 }
 
-@keyframes sparkleAnim {
-  0% {
-    opacity: 0;
-    transform: scale(0) rotate(75deg);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1) rotate(120deg);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0) rotate(150deg);
-  }
+.get-in-touch:hover {
+  background: transparent;
+  box-shadow:
+    4px 4px 6px 0 rgba(255, 255, 255, 0.5),
+    -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+    inset 4px 4px 6px 0 rgba(116, 125, 136, 0.3);
+  color: #fff;
+}
+
+.get-in-touch:hover::after {
+  transform: scale(2) rotate(180deg);
+  box-shadow:
+    4px 4px 6px 0 rgba(255, 255, 255, 0.5),
+    -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
+    inset -4px -4px 6px 0 rgba(255, 255, 255, 0.5),
+    inset 4px 4px 6px 0 rgba(116, 125, 136, 0.3);
+}
+
+.btn-3 {
+  background: linear-gradient(
+    0deg,
+    rgba(0, 172, 238, 1) 0%,
+    rgba(2, 126, 251, 1) 100%
+  );
+  width: 160px; /* slightly wider for text */
+  height: 45px;
+  line-height: 45px;
+  padding: 0;
+  border: none;
+  text-align: center;
+  text-decoration: none; /* remove underline */
+  color: #fff; /* default text color */
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.btn-3 span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-3:before,
+.btn-3:after {
+  position: absolute;
+  content: "";
+  right: 0;
+  top: 0;
+  background: rgba(2, 126, 251, 1);
+  transition: all 0.3s ease;
+}
+
+.btn-3:before {
+  height: 0%;
+  width: 2px;
+}
+
+.btn-3:after {
+  width: 0%;
+  height: 2px;
+  border-radius: 8px;
+}
+
+.btn-3:hover {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 8px;
+}
+
+.btn-3:hover:before {
+  height: 100%;
+}
+
+.btn-3:hover:after {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.btn-3 span:hover {
+  color: rgba(2, 126, 251, 1);
+  border-radius: 8px;
+}
+
+.btn-3 span:before,
+.btn-3 span:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+  background: rgba(2, 126, 251, 1);
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.btn-3 span:before {
+  width: 2px;
+  height: 0%;
+}
+
+.btn-3 span:after {
+  width: 0%;
+  height: 2px;
+  border-radius: 8px;
+}
+
+.btn-3 span:hover:before {
+  height: 100%;
+}
+
+.btn-3 span:hover:after {
+  width: 100%;
+  border-radius: 8px;
 }
