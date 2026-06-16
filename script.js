@@ -81,19 +81,73 @@ function getPreferredTheme() {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
-function updateThemeButton(btn, theme) {
-  btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-}
-
 function setTheme(theme, persist = true) {
   document.body.dataset.theme = theme;
   if (persist) localStorage.setItem('theme', theme);
-  const toggle = document.querySelector('.theme-toggle');
-  if (toggle) updateThemeButton(toggle, theme);
 }
 
-function toggleTheme() {
-  setTheme(document.body.dataset.theme === 'dark' ? 'light' : 'dark');
+function initThemeToggle() {
+  const switchToggle = document.getElementById('theme-input');
+  if (!switchToggle || typeof gsap === 'undefined') return;
+
+  const back = document.getElementById('back');
+  const front = document.getElementById('front');
+  let isDay = true;
+
+  const syncScenes = () => {
+    back?.setAttribute('href', '#' + (isDay ? 'day' : 'night'));
+    front?.setAttribute('href', '#' + (isDay ? 'night' : 'day'));
+  };
+
+  const duration = 0.4;
+  const scale = 30;
+  const toNightAnimation = gsap.timeline({ paused: true });
+
+  toNightAnimation
+    .to('#night-content', { duration: duration * 0.5, opacity: 1, ease: 'power2.inOut' })
+    .to('#circle', {
+      duration,
+      ease: 'power4.in',
+      scaleX: scale,
+      scaleY: scale,
+      x: 1,
+      transformOrigin: '100% 50%',
+    }, 0)
+    .set('#circle', { scaleX: -scale, onUpdate: syncScenes }, duration)
+    .to('#circle', {
+      duration,
+      ease: 'power4.out',
+      scaleX: -1,
+      scaleY: 1,
+      x: 2,
+    }, duration)
+    .to('#day-content', { duration: duration * 0.5, opacity: 0.5 }, duration * 1.5);
+
+  // Star twinkling
+  document.querySelectorAll('.star').forEach(star =>
+    gsap.to(star, { duration: 'random(0.4, 1.5)', repeat: -1, yoyo: true, opacity: 'random(0.2, 0.5)' })
+  );
+
+  // Cloud drift
+  gsap.to('.clouds-big',    { duration: 15, repeat: -1, x: -74, ease: 'linear' });
+  gsap.to('.clouds-medium', { duration: 20, repeat: -1, x: -65, ease: 'linear' });
+  gsap.to('.clouds-small',  { duration: 25, repeat: -1, x: -71, ease: 'linear' });
+
+  switchToggle.addEventListener('change', () => {
+    isDay = switchToggle.checked;
+    setTheme(isDay ? 'light' : 'dark');
+    isDay ? toNightAnimation.reverse() : toNightAnimation.play();
+  });
+
+  // Initialise to saved/system preference without animating
+  const theme = getPreferredTheme();
+  if (theme === 'dark') {
+    isDay = false;
+    switchToggle.checked = false;
+    syncScenes();
+    toNightAnimation.progress(1).pause();
+  }
+  setTheme(theme, false);
 }
 
 /* ===== MOBILE NAV ===== */
@@ -133,8 +187,7 @@ window.addEventListener('resize', () => {
 });
 
 window.addEventListener('DOMContentLoaded', () => {
-  setTheme(getPreferredTheme(), false);
-  document.querySelector('.theme-toggle')?.addEventListener('click', toggleTheme);
+  initThemeToggle();
   initNav();
   initBackground();
   animateBackground();
