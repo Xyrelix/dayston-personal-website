@@ -4,28 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Oladayo Oladoyin | Software Engineer</title>
+  <meta name="description" content="Oladayo Oladoyin — software engineer building full-stack and Web3 products.">
   <link rel="icon" href="realprofilepic.png.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 </head>
-<body>
-  <div class="background-tech" aria-hidden="true"></div>
+<body data-theme="dark">
+  <canvas class="mesh-canvas" aria-hidden="true"></canvas>
+  <div class="glow-orb glow-orb-a" aria-hidden="true"></div>
+  <div class="glow-orb glow-orb-b" aria-hidden="true"></div>
+
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <div class="header-inner">
-      <a href="#" class="brand">Oladayo OLADOYIN</a>
+      <a href="#" class="brand"><span class="brand-word">Oladayo</span><span class="brand-proto">://</span></a>
       <nav class="nav-links" id="nav-links" aria-label="Primary navigation">
-        <a href="#about">About</a>
-        <a href="#stack">Stack</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+        <a href="#about">/about</a>
+        <a href="#stack">/stack</a>
+        <a href="#projects">/projects</a>
+        <a href="#contact">/contact</a>
       </nav>
       <div class="header-actions">
         <label class="theme-toggle" aria-label="Toggle day/night mode">
-          <input id="theme-input" type="checkbox" checked>
+          <input id="theme-input" type="checkbox">
           <span class="checkmark">
             <svg id="toggle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 34" width="60" height="34">
               <defs>
@@ -58,29 +63,29 @@
                   </g>
                 </g>
                 <g id="night">
-                  <rect width="60" height="34" style="fill:#004373"/>
+                  <rect width="60" height="34" style="fill:#0d0620"/>
                   <g id="night-content">
-                    <polygon class="star" points="46 4.89 46.62 6.14 48.01 6.35 47.01 7.33 47.24 8.71 46 8.06 44.76 8.71 44.99 7.33 43.99 6.35 45.38 6.14 46 4.89" style="fill:#fff5a6"/>
-                    <polygon class="star" points="58.58 21.93 59.46 23.02 60.86 22.91 60.1 24.09 60.63 25.39 59.28 25.02 58.21 25.94 58.14 24.54 56.94 23.8 58.25 23.3 58.58 21.93" style="fill:#fff5a6"/>
-                    <polygon class="star" points="40.71 12.02 40.82 13.42 42.03 14.13 40.74 14.66 40.44 16.04 39.53 14.97 38.13 15.11 38.87 13.91 38.3 12.63 39.67 12.96 40.71 12.02" style="fill:#fff5a6"/>
-                    <polygon class="star" points="5 16.89 5.62 18.14 7.01 18.35 6 19.33 6.24 20.71 5 20.06 3.76 20.71 4 19.33 2.99 18.35 4.38 18.14 5 16.89" style="fill:#fff5a6"/>
-                    <polygon class="star" points="60.57 6.97 60.79 8.36 62.05 8.97 60.8 9.6 60.61 10.99 59.62 10 58.24 10.25 58.88 9 58.22 7.76 59.6 7.99 60.57 6.97" style="fill:#fff5a6"/>
-                    <polygon class="star" points="30.91 26.12 30.86 27.52 31.98 28.36 30.63 28.74 30.18 30.07 29.4 28.91 28 28.89 28.86 27.78 28.45 26.44 29.77 26.93 30.91 26.12" style="fill:#fff5a6"/>
-                    <polygon class="star" points="17.52 13.95 18.44 15.01 19.83 14.86 19.11 16.06 19.68 17.34 18.32 17.02 17.28 17.96 17.16 16.56 15.94 15.87 17.23 15.32 17.52 13.95" style="fill:#fff5a6"/>
-                    <polygon class="star" points="60.53 16.01 61.11 16.41 61.76 16.15 61.56 16.83 62 17.37 61.3 17.39 60.92 17.98 60.69 17.32 60.01 17.14 60.56 16.71 60.53 16.01" style="fill:#fff5a6"/>
-                    <polygon class="star" points="41.99 21.89 42.31 22.52 43 22.62 42.5 23.11 42.62 23.8 41.99 23.47 41.37 23.8 41.49 23.11 40.99 22.62 41.69 22.52 41.99 21.89" style="fill:#fff5a6"/>
-                    <polygon class="star" points="63.47 26.02 63.43 26.72 63.98 27.15 63.3 27.32 63.05 27.98 62.68 27.39 61.98 27.36 62.43 26.82 62.24 26.14 62.89 26.4 63.47 26.02" style="fill:#fff5a6"/>
-                    <polygon class="star" points="36.99 9.89 37.31 10.52 38 10.62 37.5 11.11 37.62 11.8 36.99 11.47 36.37 11.8 36.49 11.11 35.99 10.62 36.69 10.52 36.99 9.89" style="fill:#fff5a6"/>
-                    <polygon class="star" points="28.5 4.89 28.65 5.2 29 5.25 28.75 5.5 28.81 5.85 28.5 5.68 28.18 5.85 28.24 5.5 27.99 5.25 28.34 5.2 28.5 4.89" style="fill:#fff5a6"/>
-                    <polygon class="star" points="28.5 12.89 28.65 13.2 29 13.25 28.75 13.5 28.81 13.85 28.5 13.68 28.18 13.85 28.24 13.5 27.99 13.25 28.34 13.2 28.5 12.89" style="fill:#fff5a6"/>
-                    <polygon class="star" points="47.75 22.96 47.72 23.31 47.98 23.54 47.64 23.61 47.5 23.94 47.32 23.63 46.97 23.6 47.21 23.34 47.13 23 47.45 23.14 47.75 22.96" style="fill:#fff5a6"/>
-                    <polygon class="star" points="51.75 31.96 51.72 32.31 51.98 32.54 51.64 32.62 51.5 32.94 51.32 32.63 50.97 32.6 51.21 32.34 51.13 32 51.45 32.15 51.75 31.96" style="fill:#fff5a6"/>
-                    <polygon class="star" points="44.69 29.93 44.7 30.28 45 30.47 44.67 30.59 44.58 30.93 44.37 30.66 44.01 30.68 44.21 30.38 44.08 30.06 44.42 30.15 44.69 29.93" style="fill:#fff5a6"/>
-                    <polygon class="star" points="24.32 10.92 24.58 11.16 24.92 11.07 24.78 11.4 24.96 11.7 24.61 11.66 24.39 11.93 24.31 11.58 23.98 11.45 24.29 11.27 24.32 10.92" style="fill:#fff5a6"/>
-                    <polygon class="star" points="24.94 13.18 24.71 13.45 24.79 13.79 24.47 13.65 24.17 13.84 24.2 13.49 23.93 13.26 24.27 13.19 24.41 12.86 24.59 13.16 24.94 13.18" style="fill:#fff5a6"/>
-                    <polygon class="star" points="32 19.89 32.31 20.52 33 20.62 32.5 21.11 32.62 21.8 32 21.47 31.37 21.8 31.49 21.11 30.99 20.62 31.68 20.52 32 19.89" style="fill:#fff5a6"/>
-                    <polygon class="star" points="19.61 21.97 20.15 22.42 20.82 22.23 20.56 22.88 20.95 23.46 20.25 23.42 19.82 23.97 19.64 23.29 18.98 23.04 19.58 22.67 19.61 21.97" style="fill:#fff5a6"/>
-                    <polygon class="star" points="9.51 8.04 9.43 8.74 9.96 9.2 9.28 9.34 9 9.98 8.65 9.37 7.96 9.31 8.43 8.79 8.27 8.11 8.91 8.4 9.51 8.04" style="fill:#fff5a6"/>
+                    <polygon class="star" points="46 4.89 46.62 6.14 48.01 6.35 47.01 7.33 47.24 8.71 46 8.06 44.76 8.71 44.99 7.33 43.99 6.35 45.38 6.14 46 4.89" style="fill:#c4b5fd"/>
+                    <polygon class="star" points="58.58 21.93 59.46 23.02 60.86 22.91 60.1 24.09 60.63 25.39 59.28 25.02 58.21 25.94 58.14 24.54 56.94 23.8 58.25 23.3 58.58 21.93" style="fill:#67e8f9"/>
+                    <polygon class="star" points="40.71 12.02 40.82 13.42 42.03 14.13 40.74 14.66 40.44 16.04 39.53 14.97 38.13 15.11 38.87 13.91 38.3 12.63 39.67 12.96 40.71 12.02" style="fill:#c4b5fd"/>
+                    <polygon class="star" points="5 16.89 5.62 18.14 7.01 18.35 6 19.33 6.24 20.71 5 20.06 3.76 20.71 4 19.33 2.99 18.35 4.38 18.14 5 16.89" style="fill:#f9a8d4"/>
+                    <polygon class="star" points="60.57 6.97 60.79 8.36 62.05 8.97 60.8 9.6 60.61 10.99 59.62 10 58.24 10.25 58.88 9 58.22 7.76 59.6 7.99 60.57 6.97" style="fill:#67e8f9"/>
+                    <polygon class="star" points="30.91 26.12 30.86 27.52 31.98 28.36 30.63 28.74 30.18 30.07 29.4 28.91 28 28.89 28.86 27.78 28.45 26.44 29.77 26.93 30.91 26.12" style="fill:#c4b5fd"/>
+                    <polygon class="star" points="17.52 13.95 18.44 15.01 19.83 14.86 19.11 16.06 19.68 17.34 18.32 17.02 17.28 17.96 17.16 16.56 15.94 15.87 17.23 15.32 17.52 13.95" style="fill:#f9a8d4"/>
+                    <polygon class="star" points="60.53 16.01 61.11 16.41 61.76 16.15 61.56 16.83 62 17.37 61.3 17.39 60.92 17.98 60.69 17.32 60.01 17.14 60.56 16.71 60.53 16.01" style="fill:#c4b5fd"/>
+                    <polygon class="star" points="41.99 21.89 42.31 22.52 43 22.62 42.5 23.11 42.62 23.8 41.99 23.47 41.37 23.8 41.49 23.11 40.99 22.62 41.69 22.52 41.99 21.89" style="fill:#67e8f9"/>
+                    <polygon class="star" points="63.47 26.02 63.43 26.72 63.98 27.15 63.3 27.32 63.05 27.98 62.68 27.39 61.98 27.36 62.43 26.82 62.24 26.14 62.89 26.4 63.47 26.02" style="fill:#c4b5fd"/>
+                    <polygon class="star" points="36.99 9.89 37.31 10.52 38 10.62 37.5 11.11 37.62 11.8 36.99 11.47 36.37 11.8 36.49 11.11 35.99 10.62 36.69 10.52 36.99 9.89" style="fill:#f9a8d4"/>
+                    <polygon class="star" points="28.5 4.89 28.65 5.2 29 5.25 28.75 5.5 28.81 5.85 28.5 5.68 28.18 5.85 28.24 5.5 27.99 5.25 28.34 5.2 28.5 4.89" style="fill:#c4b5fd"/>
+                    <polygon class="star" points="28.5 12.89 28.65 13.2 29 13.25 28.75 13.5 28.81 13.85 28.5 13.68 28.18 13.85 28.24 13.5 27.99 13.25 28.34 13.2 28.5 12.89" style="fill:#67e8f9"/>
+                    <polygon class="star" points="47.75 22.96 47.72 23.31 47.98 23.54 47.64 23.61 47.5 23.94 47.32 23.63 46.97 23.6 47.21 23.34 47.13 23 47.45 23.14 47.75 22.96" style="fill:#c4b5fd"/>
+                    <polygon class="star" points="51.75 31.96 51.72 32.31 51.98 32.54 51.64 32.62 51.5 32.94 51.32 32.63 50.97 32.6 51.21 32.34 51.13 32 51.45 32.15 51.75 31.96" style="fill:#f9a8d4"/>
+                    <polygon class="star" points="44.69 29.93 44.7 30.28 45 30.47 44.67 30.59 44.58 30.93 44.37 30.66 44.01 30.68 44.21 30.38 44.08 30.06 44.42 30.15 44.69 29.93" style="fill:#c4b5fd"/>
+                    <polygon class="star" points="24.32 10.92 24.58 11.16 24.92 11.07 24.78 11.4 24.96 11.7 24.61 11.66 24.39 11.93 24.31 11.58 23.98 11.45 24.29 11.27 24.32 10.92" style="fill:#67e8f9"/>
+                    <polygon class="star" points="24.94 13.18 24.71 13.45 24.79 13.79 24.47 13.65 24.17 13.84 24.2 13.49 23.93 13.26 24.27 13.19 24.41 12.86 24.59 13.16 24.94 13.18" style="fill:#c4b5fd"/>
+                    <polygon class="star" points="32 19.89 32.31 20.52 33 20.62 32.5 21.11 32.62 21.8 32 21.47 31.37 21.8 31.49 21.11 30.99 20.62 31.68 20.52 32 19.89" style="fill:#f9a8d4"/>
+                    <polygon class="star" points="19.61 21.97 20.15 22.42 20.82 22.23 20.56 22.88 20.95 23.46 20.25 23.42 19.82 23.97 19.64 23.29 18.98 23.04 19.58 22.67 19.61 21.97" style="fill:#c4b5fd"/>
+                    <polygon class="star" points="9.51 8.04 9.43 8.74 9.96 9.2 9.28 9.34 9 9.98 8.65 9.37 7.96 9.31 8.43 8.79 8.27 8.11 8.91 8.4 9.51 8.04" style="fill:#67e8f9"/>
                   </g>
                 </g>
                 <clipPath id="switch">
@@ -98,170 +103,210 @@
             </svg>
           </span>
         </label>
-        <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+        <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
       </div>
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <section class="hero">
       <div class="hero-text">
-        <p class="eyebrow">Hi, I'm</p>
-        <h1 class="hero-name">Oladayo<br>OLADOYIN</h1>
-        <section>
-          <div>
-            <p class="hero-role">Software Engineer</p>
-            <p class="hero-bio">Building immaculate digital experiences with unbridled imagination.</p>
-          </div>
-        </section>
+        <p class="eyebrow">Software Engineer <span class="eyebrow-dot" aria-hidden="true"></span> Web3 Builder</p>
+        <h1 class="hero-name">Oladayo<br>Oladoyin</h1>
+        <p class="hero-role">I build full-stack products &amp; on-chain experiences.</p>
+        <p class="hero-bio">From payment rails to prediction markets, I turn ambitious ideas into shipped, working software — across web, backend and blockchain.</p>
         <div class="hero-actions">
-          <a href="#contact" class="get-in-touch">Get in Touch</a>
+          <a href="#contact" class="btn btn-primary">Get in Touch</a>
           <a href="https://github.com/Xyrelix" target="_blank" class="btn btn-outline">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github w-4 h-4 mr-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
               <path d="M9 18c-4.51 2-5-2-7-2"></path>
             </svg>
-            <span style="margin-left: 7px;">GitHub</span>
-          </a>        
+            <span>GitHub</span>
+          </a>
         </div>
       </div>
       <div class="hero-image">
+        <div class="hero-ring" aria-hidden="true"></div>
         <a href="realprofilepic.png.png" target="_blank" aria-label="View profile photo">
-          <img src="realprofilepic.png.png" alt="Oladayo OLADOYIN" class="profile-pic">
+          <img src="realprofilepic.png.png" alt="Oladayo Oladoyin" class="profile-pic">
         </a>
       </div>
     </section>
 
     <section class="about" id="about">
       <div class="section-inner">
-        <p class="section-eyebrow">Who I Am</p>
-        <h2 class="section-title">About Me</h2>
-        <p class="section-body">I am a software engineer with unbridled imagination to create and recreate immaculate digital experiences. Passionate about building elegant, efficient solutions to complex problems.</p>
-        <a href="OLADOYIN OLADAYO CV RESUME.pdf" download class="custom-btn btn-3"><span>Download Resume</span></a>
-        
-
+        <p class="section-eyebrow">/about</p>
+        <h2 class="section-title">Who I Am</h2>
+        <p class="section-body">I'm a software engineer with an appetite for building — and rebuilding — until a product feels inevitable. I care about clean systems underneath and confident, considered interfaces on top, whether that's a multi-tenant SaaS backend or an on-chain escrow flow.</p>
+        <a href="OLADOYIN OLADAYO CV RESUME.pdf" download class="btn btn-outline btn-resume">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>
+          </svg>
+          <span>Download Resume</span>
+        </a>
       </div>
     </section>
 
     <section class="stack" id="stack">
       <div class="section-inner">
-        <p class="section-eyebrow">What I Work With</p>
-        <h2 class="section-title">Stack</h2>
+        <p class="section-eyebrow">/stack</p>
+        <h2 class="section-title">What I Work With</h2>
         <div class="tech-grid">
-          <section>
-            <div class="languages">
+          <div class="tech-group">
             <h3 class="tech-category">Languages</h3>
-            <div class="tech-card">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML" class="tech-icon">
-              <span>HTML</span>
-            </div>
-            <div class="tech-card">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS" class="tech-icon">
-              <span>CSS</span>
-            </div>
-            <div class="tech-card">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg" alt="JavaScript" class="tech-icon">
-              <span>JavaScript</span>
-            </div>
-            <div class="tech-card">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Python.svg" alt="Python" class="tech-icon">
-              <span>Python</span>
-            </div>
-            <div class="tech-card">
-              <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg" alt="Java" class="tech-icon">
-              <span>Java</span>
-            </div>
-          </div>
-          </section>
-          <section>
-            <div class="frameworks">
-            <h3 class="tech-category">Frameworks & Libraries</h3>
-            <div class="tech-card">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" class="tech-icon">
-              <span>React</span>
-            </div>
-            <div class="tech-card">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" alt="TypeScript" class="tech-icon">
-              <span>TypeScript</span>
-            </div>
-            <div class="tech-card">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="Node.js" class="tech-icon">
-              <span>Node.js</span>
-            </div>
-          </div>
-          </section>
-          <section>
-            <div class="tools">
-            <h3 class="tech-category">Tools & Platforms</h3>
-            <div class="tech-card">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Git_icon.svg" alt="Git" class="tech-icon">
-              <span>Git</span>
-            </div>
-            <div class="tech-card">
-              <img src="https://imgs.search.brave.com/PLcg9HkVT2qRVkPdPYltheB7WfO8r_7UUR3_OAfQn9Q/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4u/aWNvbnNjb3V0LmNv/bS9pY29uL2ZyZWUv/cG5nLTI1Ni9mcmVl/LWdpdGh1Yi1sb2dv/LWljb24tc3ZnLWRv/d25sb2FkLXBuZy04/NjMwMzk1LnBuZz9m/PXdlYnAmdz0xMjg" alt="GitHub" class="tech-icon">
-              <span>GitHub</span>
-            </div>
+            <div class="tech-row">
               <div class="tech-card">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Vercel_logo_2025.svg" alt="Vercel" class="tech-icon">
-              <span>Vercel</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML" class="tech-icon">
+                <span>HTML</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS" class="tech-icon">
+                <span>CSS</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg" alt="JavaScript" class="tech-icon">
+                <span>JavaScript</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" alt="TypeScript" class="tech-icon">
+                <span>TypeScript</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Python.svg" alt="Python" class="tech-icon">
+                <span>Python</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg" alt="Java" class="tech-icon">
+                <span>Java</span>
+              </div>
             </div>
-          </section>
+          </div>
+
+          <div class="tech-group">
+            <h3 class="tech-category">Frameworks &amp; Libraries</h3>
+            <div class="tech-row">
+              <div class="tech-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" class="tech-icon">
+                <span>React</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="Node.js" class="tech-icon">
+                <span>Node.js</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tech-group">
+            <h3 class="tech-category">Tools &amp; Platforms</h3>
+            <div class="tech-row">
+              <div class="tech-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Git_icon.svg" alt="Git" class="tech-icon">
+                <span>Git</span>
+              </div>
+              <div class="tech-card">
+                <span class="tech-icon tech-icon-glyph" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 .5C5.73.5.98 5.24.98 11.52c0 5.02 3.26 9.28 7.78 10.78.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.1-3.17.69-3.84-1.35-3.84-1.35-.52-1.31-1.27-1.67-1.27-1.67-1.04-.71.08-.69.08-.69 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.72-1.53-2.53-.29-5.2-1.27-5.2-5.63 0-1.24.44-2.26 1.16-3.05-.12-.29-.5-1.44.11-3 0 0 .95-.3 3.12 1.17a10.7 10.7 0 0 1 5.68 0c2.16-1.47 3.11-1.17 3.11-1.17.62 1.56.23 2.71.11 3 .72.79 1.16 1.81 1.16 3.05 0 4.37-2.68 5.33-5.23 5.62.41.36.77 1.06.77 2.14 0 1.54-.01 2.79-.01 3.17 0 .31.2.66.79.55 4.51-1.51 7.77-5.76 7.77-10.78C23.02 5.24 18.27.5 12 .5Z"/>
+                  </svg>
+                </span>
+                <span>GitHub</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Vercel_logo_2025.svg" alt="Vercel" class="tech-icon">
+                <span>Vercel</span>
+              </div>
+              <div class="tech-card">
+                <span class="tech-icon tech-icon-glyph" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.263.007c-3.121-.147-5.744 2.109-6.192 5.082-.018.138-.045.272-.067.405-.696 3.703-3.936 6.507-7.827 6.507-1.388 0-2.691-.356-3.825-.979a.2024.2024 0 0 0-.302.178V24H12v-8.999c0-1.656 1.338-3 2.987-3h2.988c3.382 0 6.103-2.817 5.97-6.244-.12-3.084-2.61-5.603-5.682-5.75"/>
+                  </svg>
+                </span>
+                <span>Render</span>
+              </div>
+              <div class="tech-card">
+                <span class="tech-icon tech-icon-glyph" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12c6.616 0 12-5.383 12-12S18.616 0 12 0zm0 1.144c5.995 0 10.856 4.86 10.856 10.856 0 5.995-4.86 10.856-10.856 10.856-5.996 0-10.856-4.86-10.856-10.856C1.144 6.004 6.004 1.144 12 1.144zM8.37 5.868a6.707 6.707 0 0 0-.423.005c-.983.056-1.573.517-1.735 1.472-.115.665-.096 1.348-.143 2.017-.013.35-.05.697-.115 1.038-.134.609-.397.798-1.016.83a2.65 2.65 0 0 0-.244.042v1.463c1.126.055 1.278.452 1.37 1.629.033.429-.013.858.015 1.287.018.406.073.808.156 1.2.259 1.075 1.307 1.435 2.575 1.218v-1.283c-.203 0-.383.005-.558 0-.43-.013-.591-.12-.632-.535-.056-.535-.042-1.08-.075-1.62-.064-1.001-.175-1.988-1.153-2.625.503-.37.868-.812.983-1.398.083-.41.134-.821.166-1.237.028-.415-.023-.84.014-1.25.06-.665.102-.937.9-.91.12 0 .235-.017.369-.027v-1.31c-.16 0-.31-.004-.454-.006zm7.593.009a4.247 4.247 0 0 0-.813.06v1.274c.245 0 .434 0 .623.005.328.004.577.13.61.494.032.332.031.669.064 1.006.065.669.101 1.347.217 2.007.102.544.475.95.941 1.283-.817.549-1.057 1.333-1.098 2.215-.023.604-.037 1.213-.069 1.822-.028.554-.222.734-.78.748-.157.004-.31.018-.484.028v1.305c.327 0 .627.019.927 0 .932-.055 1.495-.507 1.68-1.412.078-.498.124-1 .138-1.504.032-.461.028-.927.074-1.384.069-.715.397-1.01 1.112-1.057a.972.972 0 0 0 .199-.046v-1.463c-.12-.014-.204-.027-.291-.032-.536-.023-.804-.203-.937-.71a5.146 5.146 0 0 1-.152-.993c-.037-.618-.033-1.241-.074-1.86-.08-1.192-.794-1.753-1.887-1.786zm-6.89 5.28a.844.844 0 0 0-.083 1.684h.055a.83.83 0 0 0 .877-.78v-.046a.845.845 0 0 0-.83-.858zm2.911 0a.808.808 0 0 0-.834.78c0 .027 0 .05.004.078 0 .503.342.826.859.826.507 0 .826-.332.826-.853-.005-.503-.342-.836-.855-.831zm2.963 0a.861.861 0 0 0-.876.835c0 .47.378.849.849.849h.009c.425.074.853-.337.881-.83.023-.457-.392-.854-.863-.854z"/>
+                  </svg>
+                </span>
+                <span>Swagger UI</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
     <section class="projects" id="projects">
       <div class="section-inner">
-        <p class="section-eyebrow">What I've Built</p>
-        <h2 class="section-title">Projects</h2>
+        <p class="section-eyebrow">/projects</p>
+        <h2 class="section-title">What I've Built</h2>
         <div class="project-list">
-          <div class="project-card">
-            <h3 class="project-title">
-              <img src="https://royastacks.vercel.app/logo.png" alt="RoyalStack favicon" class="project-favicon">
-              <a href="https://royastacks.vercel.app/" target="_blank">Royal Stacks</a>
-            </h3>
-            <p class="project-description">A modern web application built with React, TypeScript and Node.js, designed to provide a means for users to stake their cryptocurrency in familiar poker games!</p>
-          </div>
-          <div class="project-card">
-            <h3 class="project-title">
-              <img src="morphswiftlogo.png" alt="MorphSwift favicon" class="project-favicon">
-              <a href="https://morphswift.vercel.app/" target="_blank">MorphSwift</a>
-            </h3>
-            <p class="project-description">A dynamic, yet simple web application built with HTML, CSS and Node.js, designed to provide a means for Small and Medium-Scale Enterprises to make and receive payments efficiently on blockchain networks!</p>
-          </div>
-          <div class="project-card">
-            <h3 class="project-title">
-              <img src="https://celoseer.vercel.app/reallogo.png" alt="Celoseer favicon" class="project-favicon">
-              <a href="https://celoseer.vercel.app/" target="_blank">CeloSeer</a>
-            </h3>
-            <p class="project-description">An ultra-attractive AI prediction platform built with React, Typescript and Node.js for people to make informed staking decisions with their cryptocurrency wallets on the outcomes of games in the 2026 FIFA World Cup!</p>
-          </div>
-          <div class="project-card">
-            <h3 class="project-title">
-              <img src="Fluxpay icon light.png" alt="Fluxpay favicon" class="project-favicon">
-              <a href="https://flux-pay-woad.vercel.app/" target="_blank">FluxPay</a>
-            </h3>
-            <p class="project-description">Built with React, Typescript and Node.js, FluxPay provides a seamless payment experience as a multichain infrastructure for creator-brand deals. Secured on-chain with USDC escrow and AI milestone verification.</p>
-          </div>
+          <a class="project-card" href="https://royastacks.vercel.app/" target="_blank">
+            <div class="project-head">
+              <img src="https://royastacks.vercel.app/logo.png" alt="" class="project-favicon">
+              <h3 class="project-title">Royal Stacks</h3>
+              <svg class="project-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+            </div>
+            <p class="project-description">A modern web app for staking cryptocurrency in familiar poker games, built with React, TypeScript and Node.js.</p>
+            <div class="project-tags"><span>React</span><span>TypeScript</span><span>Node.js</span></div>
+          </a>
+
+          <a class="project-card" href="https://morphswift.vercel.app/" target="_blank">
+            <div class="project-head">
+              <img src="morphswiftlogo.png" alt="" class="project-favicon">
+              <h3 class="project-title">MorphSwift</h3>
+              <svg class="project-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+            </div>
+            <p class="project-description">A simple, dynamic app letting small and medium businesses make and receive payments efficiently on blockchain networks.</p>
+            <div class="project-tags"><span>HTML</span><span>CSS</span><span>Node.js</span></div>
+          </a>
+
+          <a class="project-card" href="https://celoseer.vercel.app/" target="_blank">
+            <div class="project-head">
+              <img src="https://celoseer.vercel.app/reallogo.png" alt="" class="project-favicon">
+              <h3 class="project-title">CeloSeer</h3>
+              <svg class="project-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+            </div>
+            <p class="project-description">An AI prediction platform for informed staking decisions on 2026 FIFA World Cup outcomes, using on-chain wallets.</p>
+            <div class="project-tags"><span>React</span><span>TypeScript</span><span>Node.js</span></div>
+          </a>
+
+          <a class="project-card" href="https://flux-pay-woad.vercel.app/" target="_blank">
+            <div class="project-head">
+              <img src="Fluxpay icon light.png" alt="" class="project-favicon">
+              <h3 class="project-title">FluxPay</h3>
+              <svg class="project-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+            </div>
+            <p class="project-description">A multichain payment infrastructure for creator-brand deals, secured on-chain with USDC escrow and AI milestone verification.</p>
+            <div class="project-tags"><span>React</span><span>TypeScript</span><span>Node.js</span></div>
+          </a>
         </div>
       </div>
     </section>
+
     <section class="contact" id="contact">
       <div class="section-inner">
-        <p class="section-eyebrow">Let's Talk</p>
-        <h2 class="section-title">Contact</h2>
+        <p class="section-eyebrow">/contact</p>
+        <h2 class="section-title">Let's Talk</h2>
         <p class="section-body">Have a project in mind or just want to say hello? I'd love to hear from you.</p>
         <div class="social-links">
           <a href="https://wa.me/+2347039951113?" target="_blank" aria-label="WhatsApp" class="social-link">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.36 7.56L4 20l1.06-4.42A8.5 8.5 0 1 1 21 11.5Z"/><path d="M9 10.5c0 3 2.5 5.5 5.5 5.5"/></svg>
           </a>
           <a href="https://x.com/Dayston_" target="_blank" aria-label="X (Twitter)" class="social-link">
-            <img src="https://pngimg.com/uploads/x_logo/x_logo_PNG19.png" alt="X" class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16"/><path d="M20 4 4 20"/></svg>
           </a>
           <a href="https://www.linkedin.com/in/oladayo-oladoyin" target="_blank" aria-label="LinkedIn" class="social-link">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="4" height="11"/><circle cx="5" cy="5" r="1.6"/><path d="M11 20v-7a3 3 0 0 1 6 0v7"/><path d="M11 20V9"/></svg>
           </a>
           <a href="https://www.instagram.com/daystonn/" target="_blank" aria-label="Instagram" class="social-link">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>
           </a>
         </div>
         <p class="contact-email">
@@ -273,7 +318,7 @@
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p>&copy; 2026 Oladayo Oladoyin. All rights reserved.</p>
+      <p>&copy; 2026 Oladayo Oladoyin — All Rights Reserved </p>
     </div>
   </footer>
 
