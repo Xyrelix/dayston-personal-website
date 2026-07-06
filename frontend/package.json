@@ -1,0 +1,17 @@
+{
+  "name": "personal-website-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for Oladayo Oladoyin's personal website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "python -m http.server 8000 --directory .",
+    "preview": "python -m http.server 8000 --directory ."
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.4.1"
+  },
+  "keywords": [],
+  "author": "Oladayo Oladoyin",
+  "license": "ISC"
+}
