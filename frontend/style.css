@@ -706,6 +706,12 @@ body[data-theme="light"] .glow-orb {
   background: var(--surface-strong);
 }
 
+/* Logos with transparent/light art that need a fixed dark backdrop
+   regardless of light/dark theme, so they stay visible in light mode. */
+.project-favicon--dark-bg {
+  background: #0c0818;
+}
+
 .project-arrow {
   color: var(--text-muted);
   flex-shrink: 0;
