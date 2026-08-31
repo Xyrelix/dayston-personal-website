@@ -482,6 +482,30 @@ body[data-theme="light"] .glow-orb {
   to { transform: rotate(360deg); }
 }
 
+.hero-badge {
+  position: absolute;
+  inset: -42px;
+  animation: spin-ccw 24s linear infinite;
+  pointer-events: none;
+}
+
+.hero-badge text {
+  fill: var(--violet);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  letter-spacing: 3px;
+}
+
+.hero-badge-dots {
+  fill: var(--cyan);
+  font-size: 20px;
+  filter: drop-shadow(0 0 3px var(--cyan)) drop-shadow(0 0 7px var(--cyan));
+}
+
+@keyframes spin-ccw {
+  to { transform: rotate(-360deg); }
+}
+
 .hero-image a {
   display: block;
   border-radius: 50%;
@@ -930,6 +954,10 @@ body[data-theme="light"] .glow-orb {
   }
 
   .hero-ring {
+    animation: none;
+  }
+
+  .hero-badge {
     animation: none;
   }
 
