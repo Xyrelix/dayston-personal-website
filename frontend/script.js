@@ -353,12 +353,113 @@ function initStats() {
   });
 }
 
+/* ===== STACK ORBIT ===== */
+// Builds the orbit + legend from the plain .tech-grid list, which stays as the no-JS fallback.
+function initStackOrbit() {
+  const grid = document.querySelector('.tech-grid');
+  if (!grid) return;
+
+  const palette = ['#8b5cf6', '#22d3ee', '#f472b6', '#f59e0b', '#34d399'];
+  const groups = Array.from(grid.querySelectorAll('.tech-group')).map((group, i) => ({
+    name: group.querySelector('.tech-category').textContent.trim(),
+    color: palette[i % palette.length],
+    items: Array.from(group.querySelectorAll('.tech-card')).map(card => ({
+      label: card.querySelector(':scope > span:last-child').textContent.trim(),
+      icon: card.querySelector('.tech-icon'),
+    })),
+  }));
+  const total = groups.reduce((n, g) => n + g.items.length, 0);
+
+  // Inner ring: first group; middle: next two; outer: the rest
+  const rings = [
+    { r: 0.18, dur: 60, groups: [] },
+    { r: 0.31, dur: 85, groups: [] },
+    { r: 0.44, dur: 110, groups: [] },
+  ];
+  groups.forEach((g, i) => rings[i === 0 ? 0 : i <= 2 ? 1 : 2].groups.push(i));
+
+  const layout = document.createElement('div');
+  layout.className = 'stack-orbit-layout';
+
+  const orbit = document.createElement('div');
+  orbit.className = 'orbit';
+  orbit.setAttribute('aria-hidden', 'true');
+  orbit.innerHTML = `<div class="orbit-core"><span class="orbit-core-glyph">&lt;/&gt;</span><strong>${total}</strong><span>technologies</span></div>`;
+
+  const orbitItems = [];
+  rings.forEach((ring, ringIndex) => {
+    const ringEl = document.createElement('div');
+    ringEl.className = 'orbit-ring';
+    ringEl.style.setProperty('--r', ring.r);
+    ringEl.style.setProperty('--dur', `${ring.dur}s`);
+    ringEl.style.setProperty('--dir', ringIndex % 2 ? 'reverse' : 'normal');
+    ringEl.style.setProperty('--cdir', ringIndex % 2 ? 'normal' : 'reverse');
+
+    const entries = ring.groups.flatMap(gi => groups[gi].items.map(item => ({ ...item, gi })));
+    const offset = ringIndex * 25;
+    entries.forEach((entry, idx) => {
+      const item = document.createElement('div');
+      item.className = 'orbit-item';
+      item.dataset.cat = entry.gi;
+      item.style.setProperty('--a', `${offset + (idx / entries.length) * 360}deg`);
+      item.style.setProperty('--cat', groups[entry.gi].color);
+
+      const chip = document.createElement('div');
+      chip.className = 'orbit-chip';
+      const face = document.createElement('div');
+      face.className = 'orbit-chip-face';
+      face.appendChild(entry.icon.cloneNode(true));
+      const label = document.createElement('span');
+      label.className = 'orbit-label';
+      label.textContent = entry.label;
+      chip.append(face, label);
+      item.appendChild(chip);
+      ringEl.appendChild(item);
+      orbitItems.push(item);
+    });
+    orbit.appendChild(ringEl);
+  });
+
+  const legend = document.createElement('ul');
+  legend.className = 'stack-legend';
+  const legendItems = groups.map((g, i) => {
+    const li = document.createElement('li');
+    li.dataset.cat = i;
+    li.style.setProperty('--cat', g.color);
+    li.innerHTML = `
+      <div class="legend-head"><span class="legend-dot"></span><h3 class="legend-name"></h3><span class="legend-count">${g.items.length}</span></div>
+      <p class="legend-items"></p>`;
+    li.querySelector('.legend-name').textContent = g.name;
+    li.querySelector('.legend-items').textContent = g.items.map(it => it.label).join(' · ');
+    legend.appendChild(li);
+    return li;
+  });
+
+  function focusCategory(cat) {
+    orbit.classList.toggle('has-focus', cat != null);
+    legend.classList.toggle('has-focus', cat != null);
+    orbitItems.forEach(el => el.classList.toggle('is-focus', el.dataset.cat === cat));
+    legendItems.forEach(el => el.classList.toggle('is-focus', el.dataset.cat === cat));
+  }
+
+  [...legendItems, ...orbitItems].forEach(el => {
+    el.addEventListener('mouseenter', () => focusCategory(el.dataset.cat));
+    el.addEventListener('mouseleave', () => focusCategory(null));
+  });
+
+  layout.append(orbit, legend);
+  grid.after(layout);
+  grid.hidden = true;
+}
+
 /* ===== SCROLL REVEAL ===== */
 function initReveal() {
   const groups = [
     ['.section-eyebrow, .section-title, .section-body, .btn-resume, .contact-email', 0],
     ['.tech-category', 0],
     ['.tech-card', 40],
+    ['.orbit', 0],
+    ['.stack-legend li', 70],
     ['.project-card', 70],
     ['.social-link', 60],
   ];
@@ -406,6 +507,7 @@ window.addEventListener('DOMContentLoaded', () => {
   initMesh();
   initScrollProgress();
   initRotator();
+  initStackOrbit();
   initStats();
   initReveal();
   initSpotlight();
