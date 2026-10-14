@@ -31,7 +31,10 @@ function initMesh() {
   }
 
   function draw() {
-    const rgb = document.body.dataset.theme === 'light' ? '109, 64, 220' : '167, 139, 250';
+    const light = document.body.dataset.theme === 'light';
+    const rgb = light ? '91, 33, 182' : '167, 139, 250';
+    const pointerRgb = light ? '8, 145, 178' : '34, 211, 238';
+    const boost = light ? 1.6 : 1;
     ctx.clearRect(0, 0, width, height);
 
     for (const n of nodes) {
@@ -51,7 +54,7 @@ function initMesh() {
       }
       ctx.beginPath();
       ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${rgb}, 0.55)`;
+      ctx.fillStyle = `rgba(${rgb}, ${Math.min(0.55 * boost, 0.85)})`;
       ctx.fill();
     }
 
@@ -62,7 +65,7 @@ function initMesh() {
         const b = nodes[j];
         const d = Math.hypot(a.x - b.x, a.y - b.y);
         if (d < LINK_DIST) {
-          ctx.strokeStyle = `rgba(${rgb}, ${(1 - d / LINK_DIST) * 0.22})`;
+          ctx.strokeStyle = `rgba(${rgb}, ${(1 - d / LINK_DIST) * 0.22 * boost})`;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
@@ -71,7 +74,7 @@ function initMesh() {
       }
       const pd = Math.hypot(a.x - pointer.x, a.y - pointer.y);
       if (pd < POINTER_DIST) {
-        ctx.strokeStyle = `rgba(34, 211, 238, ${(1 - pd / POINTER_DIST) * 0.45})`;
+        ctx.strokeStyle = `rgba(${pointerRgb}, ${(1 - pd / POINTER_DIST) * 0.45 * boost})`;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(pointer.x, pointer.y);
