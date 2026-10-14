@@ -137,6 +137,68 @@ body[data-theme="light"] .glow-orb {
   opacity: 0.22;
 }
 
+.glow-orb-a {
+  animation: orb-drift-a 22s ease-in-out infinite alternate;
+}
+
+.glow-orb-b {
+  animation: orb-drift-b 26s ease-in-out infinite alternate;
+}
+
+@keyframes orb-drift-a {
+  to { transform: translate(28vw, 30vh) scale(1.15); }
+}
+
+@keyframes orb-drift-b {
+  to { transform: translate(-30vw, -26vh) scale(0.9); }
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 1100;
+  background: linear-gradient(90deg, var(--violet), var(--cyan), var(--pink));
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===== SCROLL REVEAL (only when JS is running) ===== */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Once revealed, hover lifts should respond instantly, not after the stagger delay */
+.js .tech-card.reveal.is-visible,
+.js .project-card.reveal.is-visible,
+.js .social-link.reveal.is-visible {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease,
+    background 0.25s ease, color 0.25s ease, opacity 0.7s ease;
+}
+
 /* ===== NAVIGATION ===== */
 .site-header {
   position: sticky;
@@ -430,9 +492,15 @@ body[data-theme="light"] .glow-orb {
   line-height: 1.04;
   letter-spacing: -0.03em;
   background: var(--gradient-text);
+  background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: shimmer 8s ease-in-out infinite alternate;
+}
+
+@keyframes shimmer {
+  to { background-position: 100% 0; }
 }
 
 .hero-role {
@@ -440,6 +508,80 @@ body[data-theme="light"] .glow-orb {
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--text);
+  min-height: 1.6em;
+}
+
+.rotator {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.rotator-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  margin-left: 3px;
+  vertical-align: -0.15em;
+  background: var(--cyan);
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+/* Hero entrance */
+.js .hero-text > *,
+.js .hero-image {
+  animation: rise-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.js .hero-text > :nth-child(2) { animation-delay: 0.08s; }
+.js .hero-text > :nth-child(3) { animation-delay: 0.16s; }
+.js .hero-text > :nth-child(4) { animation-delay: 0.24s; }
+.js .hero-text > :nth-child(5) { animation-delay: 0.32s; }
+.js .hero-text > :nth-child(6) { animation-delay: 0.4s; }
+.js .hero-image { animation-delay: 0.2s; }
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(26px); }
+}
+
+.hero-stats {
+  display: flex;
+  gap: 36px;
+  margin: 44px 0 0;
+  padding-top: 26px;
+  border-top: 1px solid var(--border);
+}
+
+.hero-stats div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+}
+
+.hero-stats dt {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-stats dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .hero-bio {
@@ -640,6 +782,39 @@ body[data-theme="light"] .glow-orb {
 
 .tech-card:hover .tech-icon {
   filter: grayscale(0);
+  transform: scale(1.12) rotate(-4deg);
+}
+
+.tech-icon {
+  transition: filter 0.25s ease, transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+/* Single-colour black logos need flipping to stay visible on the dark theme */
+body[data-theme="dark"] .tech-icon--mono {
+  filter: invert(1) grayscale(0.15);
+}
+
+body[data-theme="dark"] .tech-card:hover .tech-icon--mono {
+  filter: invert(1);
+}
+
+/* Cursor-following spotlight on cards */
+.tech-card::after,
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(139, 92, 246, 0.16), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.tech-card:hover::after,
+.project-card:hover::after {
+  opacity: 1;
 }
 
 .tech-card:hover .tech-icon-glyph {
@@ -742,6 +917,29 @@ body[data-theme="light"] .glow-orb {
   opacity: 0;
   transform: translate(-4px, 4px);
   transition: opacity 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.project-badge {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0a0614;
+  background: var(--gradient);
+  padding: 3px 9px;
+  border-radius: 100px;
+  flex-shrink: 0;
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.35);
+  animation: badge-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes badge-pulse {
+  50% { box-shadow: 0 0 22px rgba(139, 92, 246, 0.55); }
+}
+
+.project-card--new {
+  border-color: rgba(139, 92, 246, 0.35);
 }
 
 .project-card:hover .project-arrow {
@@ -910,6 +1108,15 @@ body[data-theme="light"] .glow-orb {
     justify-content: center;
   }
 
+  .hero-stats {
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .hero-stats div {
+    align-items: center;
+  }
+
   .profile-pic {
     width: 220px;
     height: 220px;
@@ -963,5 +1170,20 @@ body[data-theme="light"] .glow-orb {
 
   .star {
     animation: none !important;
+  }
+
+  .glow-orb,
+  .hero-name,
+  .rotator-caret,
+  .project-badge,
+  .js .hero-text > *,
+  .js .hero-image {
+    animation: none;
+  }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

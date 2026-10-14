@@ -1,77 +1,101 @@
-const techLogos = [
-  "https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg",
-  "https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg",
-  "https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg",
-  "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg",
-  "https://upload.wikimedia.org/wikipedia/commons/0/0a/Python.svg",
-  "https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg",
-  "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
-  "https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg"
-];
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const particleContainer = document.querySelector('.background-tech');
-const particles = [];
-const PARTICLE_COUNT = 14;
-let containerWidth = window.innerWidth;
-let containerHeight = window.innerHeight;
+/* ===== NETWORK MESH BACKGROUND ===== */
+function initMesh() {
+  const canvas = document.querySelector('.mesh-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const LINK_DIST = 140;
+  const POINTER_DIST = 180;
+  const pointer = { x: -9999, y: -9999 };
+  let nodes = [];
+  let width = 0;
+  let height = 0;
 
-function randomBetween(min, max) {
-  return Math.random() * (max - min) + min;
-}
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-function createParticle(src) {
-  const size = randomBetween(40, 100);
-  const speed = randomBetween(0.15, 0.55);
-  const direction = randomBetween(0, Math.PI * 2);
-  const x = randomBetween(0, containerWidth - size);
-  const y = randomBetween(0, containerHeight - size);
-
-  const el = document.createElement('div');
-  el.className = 'particle';
-  el.style.width = `${size}px`;
-  el.style.opacity = randomBetween(0.05, 0.1);
-  el.style.transform = `translate(${x}px, ${y}px) rotate(${randomBetween(0, 360)}deg)`;
-
-  const img = document.createElement('img');
-  img.src = src;
-  img.alt = '';
-  el.appendChild(img);
-  particleContainer.appendChild(el);
-
-  return {
-    el,
-    x,
-    y,
-    dx: Math.cos(direction) * speed,
-    dy: Math.sin(direction) * speed,
-    size,
-    rotation: randomBetween(0, 360),
-    rotationSpeed: randomBetween(-0.03, 0.03)
-  };
-}
-
-function initBackground() {
-  particleContainer.innerHTML = '';
-  particles.length = 0;
-  containerWidth = window.innerWidth;
-  containerHeight = window.innerHeight;
-  for (let i = 0; i < PARTICLE_COUNT; i++) {
-    particles.push(createParticle(techLogos[i % techLogos.length]));
+    const count = Math.min(70, Math.round((width * height) / 18000));
+    nodes = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      dx: (Math.random() - 0.5) * 0.35,
+      dy: (Math.random() - 0.5) * 0.35,
+      r: Math.random() * 1.6 + 0.8,
+    }));
   }
-}
 
-function animateBackground() {
-  for (const p of particles) {
-    p.x += p.dx;
-    p.y += p.dy;
-    p.rotation += p.rotationSpeed;
+  function draw() {
+    const rgb = document.body.dataset.theme === 'light' ? '109, 64, 220' : '167, 139, 250';
+    ctx.clearRect(0, 0, width, height);
 
-    if (p.x <= -p.size * 0.3 || p.x >= containerWidth - p.size * 0.7) p.dx *= -1;
-    if (p.y <= -p.size * 0.3 || p.y >= containerHeight - p.size * 0.7) p.dy *= -1;
+    for (const n of nodes) {
+      if (!prefersReducedMotion) {
+        n.x += n.dx;
+        n.y += n.dy;
+        if (n.x < 0 || n.x > width) n.dx *= -1;
+        if (n.y < 0 || n.y > height) n.dy *= -1;
 
-    p.el.style.transform = `translate(${p.x}px, ${p.y}px) rotate(${p.rotation}deg)`;
+        // Gentle pull toward the cursor
+        const px = pointer.x - n.x;
+        const py = pointer.y - n.y;
+        if (Math.hypot(px, py) < POINTER_DIST) {
+          n.x += px * 0.004;
+          n.y += py * 0.004;
+        }
+      }
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${rgb}, 0.55)`;
+      ctx.fill();
+    }
+
+    ctx.lineWidth = 1;
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j];
+        const d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < LINK_DIST) {
+          ctx.strokeStyle = `rgba(${rgb}, ${(1 - d / LINK_DIST) * 0.22})`;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+      const pd = Math.hypot(a.x - pointer.x, a.y - pointer.y);
+      if (pd < POINTER_DIST) {
+        ctx.strokeStyle = `rgba(34, 211, 238, ${(1 - pd / POINTER_DIST) * 0.45})`;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(pointer.x, pointer.y);
+        ctx.stroke();
+      }
+    }
   }
-  requestAnimationFrame(animateBackground);
+
+  function loop() {
+    if (!document.hidden) draw();
+    requestAnimationFrame(loop);
+  }
+
+  window.addEventListener('pointermove', e => { pointer.x = e.clientX; pointer.y = e.clientY; });
+  document.addEventListener('pointerleave', () => { pointer.x = pointer.y = -9999; });
+  window.addEventListener('resize', () => { resize(); if (prefersReducedMotion) draw(); });
+
+  resize();
+  if (prefersReducedMotion) {
+    draw();
+    new MutationObserver(draw).observe(document.body, { attributes: true, attributeFilter: ['data-theme'] });
+  } else {
+    loop();
+  }
 }
 
 /* ===== THEME ===== */
@@ -146,6 +170,8 @@ function initThemeToggle() {
     switchToggle.checked = false;
     syncScenes();
     toNightAnimation.progress(1).pause();
+  } else {
+    switchToggle.checked = true;
   }
   setTheme(theme, false);
 }
@@ -235,14 +261,12 @@ function initNav() {
   function closeNav() {
     navLinks.classList.remove('open');
     navToggle.setAttribute('aria-expanded', 'false');
-    navToggle.textContent = '☰';
   }
 
   navToggle.addEventListener('click', (e) => {
     e.stopPropagation();
     const isOpen = navLinks.classList.toggle('open');
     navToggle.setAttribute('aria-expanded', String(isOpen));
-    navToggle.textContent = isOpen ? '✕' : '☰';
   });
 
   navLinks.querySelectorAll('a').forEach(link => {
@@ -256,16 +280,130 @@ function initNav() {
   });
 }
 
-/* ===== INIT ===== */
-window.addEventListener('resize', () => {
-  containerWidth = window.innerWidth;
-  containerHeight = window.innerHeight;
-});
+/* ===== SCROLL PROGRESS ===== */
+function initScrollProgress() {
+  const bar = document.querySelector('.scroll-progress');
+  if (!bar) return;
+  const update = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+  };
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+}
 
+/* ===== ROTATING HERO ROLE ===== */
+function initRotator() {
+  const el = document.querySelector('.rotator');
+  if (!el || prefersReducedMotion) return;
+  const words = el.dataset.words.split('|');
+  let wordIndex = 0;
+  let charIndex = words[0].length;
+  let deleting = true;
+
+  function tick() {
+    let delay = deleting ? 40 : 75;
+    if (deleting) {
+      charIndex--;
+      if (charIndex === 0) {
+        deleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        delay = 300;
+      }
+    } else {
+      charIndex++;
+      if (charIndex === words[wordIndex].length) {
+        deleting = true;
+        delay = 2200;
+      }
+    }
+    el.textContent = words[wordIndex].slice(0, charIndex);
+    setTimeout(tick, delay);
+  }
+  setTimeout(tick, 2600);
+}
+
+/* ===== HERO STATS ===== */
+function initStats() {
+  const counts = {
+    projects: document.querySelectorAll('.project-card').length,
+    tech: document.querySelectorAll('.tech-card').length,
+  };
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = counts[el.dataset.count];
+    if (!target) return;
+    el.textContent = target;
+    if (prefersReducedMotion) return;
+
+    const duration = 1400;
+    el.textContent = '0';
+    setTimeout(() => {
+      const start = performance.now();
+      const step = now => {
+        const t = Math.min((now - start) / duration, 1);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - t, 3)));
+        if (t < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, 700);
+  });
+}
+
+/* ===== SCROLL REVEAL ===== */
+function initReveal() {
+  const groups = [
+    ['.section-eyebrow, .section-title, .section-body, .btn-resume, .contact-email', 0],
+    ['.tech-category', 0],
+    ['.tech-card', 40],
+    ['.project-card', 70],
+    ['.social-link', 60],
+  ];
+  const targets = [];
+  groups.forEach(([selector, stagger]) => {
+    document.querySelectorAll(selector).forEach(el => {
+      const siblings = Array.from(el.parentElement.children).filter(c => c.matches(selector));
+      el.style.setProperty('--reveal-delay', `${siblings.indexOf(el) * stagger}ms`);
+      el.classList.add('reveal');
+      targets.push(el);
+    });
+  });
+
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    targets.forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  targets.forEach(el => observer.observe(el));
+}
+
+/* ===== CARD SPOTLIGHT ===== */
+function initSpotlight() {
+  document.querySelectorAll('.project-card, .tech-card').forEach(card => {
+    card.addEventListener('pointermove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      card.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+  });
+}
+
+/* ===== INIT ===== */
 window.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   initNav();
   initAnimatedNav();
-  initBackground();
-  animateBackground();
+  initMesh();
+  initScrollProgress();
+  initRotator();
+  initStats();
+  initReveal();
+  initSpotlight();
 });

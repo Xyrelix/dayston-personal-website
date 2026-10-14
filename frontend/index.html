@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add('js');</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 </head>
 <body data-theme="dark">
@@ -17,6 +18,7 @@
   <div class="glow-orb glow-orb-a" aria-hidden="true"></div>
   <div class="glow-orb glow-orb-b" aria-hidden="true"></div>
 
+  <div class="scroll-progress" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
@@ -117,8 +119,11 @@
       <div class="hero-text">
         <p class="eyebrow">Software Engineer <span class="eyebrow-dot" aria-hidden="true"></span> Web3 Builder</p>
         <h1 class="hero-name">Oladayo<br>Oladoyin</h1>
-        <p class="hero-role">I build full-stack products &amp; on-chain experiences.</p>
-        <p class="hero-bio">From payment rails to prediction markets, I turn ambitious ideas into shipped, working software — across web, backend and blockchain.</p>
+        <p class="hero-role">
+          <span class="sr-only">I build full-stack products, on-chain apps, AI agents and wallet security tools.</span>
+          <span aria-hidden="true">I build <span class="rotator" data-words="full-stack products|on-chain apps|AI agents|wallet security tools">full-stack products</span><span class="rotator-caret"></span></span>
+        </p>
+        <p class="hero-bio">From payment rails and invoicing to prediction markets and wallet security, I turn ambitious ideas into shipped, working software — across web, backend and blockchain.</p>
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary">Get in Touch</a>
           <a href="https://github.com/Xyrelix" target="_blank" class="btn btn-outline">
@@ -129,6 +134,11 @@
             <span>GitHub</span>
           </a>
         </div>
+        <dl class="hero-stats">
+          <div><dt>Projects shipped</dt><dd data-count="projects">12</dd></div>
+          <div><dt>Technologies</dt><dd data-count="tech">30</dd></div>
+          <div><dt>Live on mainnet</dt><dd>Arc</dd></div>
+        </dl>
       </div>
       <div class="hero-image">
         <div class="hero-ring" aria-hidden="true"></div>
@@ -213,6 +223,70 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="Node.js" class="tech-icon">
                 <span>Node.js</span>
               </div>
+              <div class="tech-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/nextjs/nextjs-original.svg" alt="Next.js" class="tech-icon tech-icon--mono" loading="lazy">
+                <span>Next.js</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/express/express-original.svg" alt="Express" class="tech-icon tech-icon--mono" loading="lazy">
+                <span>Express</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" class="tech-icon" loading="lazy">
+                <span>Tailwind CSS</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/framermotion/framermotion-original.svg" alt="Framer Motion" class="tech-icon tech-icon--mono" loading="lazy">
+                <span>Framer Motion</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tech-group">
+            <h3 class="tech-category">Web3</h3>
+            <div class="tech-row">
+              <div class="tech-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/solidity/solidity-original.svg" alt="Solidity" class="tech-icon tech-icon--mono" loading="lazy">
+                <span>Solidity</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/hardhat/hardhat-original.svg" alt="Hardhat" class="tech-icon" loading="lazy">
+                <span>Hardhat</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://cdn.simpleicons.org/wagmi" alt="wagmi + viem" class="tech-icon tech-icon--mono" loading="lazy">
+                <span>wagmi + viem</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://cdn.simpleicons.org/walletconnect" alt="WalletConnect" class="tech-icon" loading="lazy">
+                <span>WalletConnect</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://cdn.simpleicons.org/ethereum" alt="EVM chains" class="tech-icon tech-icon--mono" loading="lazy">
+                <span>EVM chains</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tech-group">
+            <h3 class="tech-category">Data &amp; AI</h3>
+            <div class="tech-row">
+              <div class="tech-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" class="tech-icon" loading="lazy">
+                <span>PostgreSQL</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/prisma/prisma-original.svg" alt="Prisma" class="tech-icon tech-icon--mono" loading="lazy">
+                <span>Prisma</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://cdn.simpleicons.org/turso" alt="Turso" class="tech-icon" loading="lazy">
+                <span>Turso</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://cdn.simpleicons.org/googlegemini" alt="Gemini API" class="tech-icon" loading="lazy">
+                <span>Gemini API</span>
+              </div>
             </div>
           </div>
 
@@ -222,6 +296,14 @@
               <div class="tech-card">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Git_icon.svg" alt="Git" class="tech-icon">
                 <span>Git</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/githubactions/githubactions-original.svg" alt="GitHub Actions" class="tech-icon" loading="lazy">
+                <span>GitHub Actions</span>
+              </div>
+              <div class="tech-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/docker/docker-original.svg" alt="Docker" class="tech-icon" loading="lazy">
+                <span>Docker</span>
               </div>
               <div class="tech-card">
                 <span class="tech-icon tech-icon-glyph" aria-hidden="true">
@@ -251,6 +333,10 @@
                 </span>
                 <span>Swagger UI</span>
               </div>
+              <div class="tech-card">
+                <img src="https://cdn.simpleicons.org/telegram" alt="Telegram Bots" class="tech-icon" loading="lazy">
+                <span>Telegram Bots</span>
+              </div>
             </div>
           </div>
         </div>
@@ -262,6 +348,39 @@
         <p class="section-eyebrow">/projects</p>
         <h2 class="section-title">What I've Built</h2>
         <div class="project-list">
+          <a class="project-card project-card--new" href="https://settla-seven.vercel.app/" target="_blank">
+            <div class="project-head">
+              <img src="https://settla-seven.vercel.app/icon.png" alt="" class="project-favicon">
+              <h3 class="project-title">Settla</h3>
+              <span class="project-badge">New</span>
+              <svg class="project-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+            </div>
+            <p class="project-description">Non-custodial USDC invoicing for small businesses. Merchants share a link or QR code and the customer's payment goes straight to them in one transaction. Live on Arc mainnet.</p>
+            <div class="project-tags"><span>Next.js</span><span>TypeScript</span><span>Solidity</span><span>Hardhat</span><span>wagmi</span><span>Tailwind CSS</span><span>Vercel</span></div>
+          </a>
+
+          <a class="project-card project-card--new" href="https://tutela-guard.vercel.app/" target="_blank">
+            <div class="project-head">
+              <img src="https://tutela-guard.vercel.app/Tutela%20logo.png" alt="" class="project-favicon">
+              <h3 class="project-title">Tutela</h3>
+              <span class="project-badge">New</span>
+              <svg class="project-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+            </div>
+            <p class="project-description">An AI agent that watches EVM wallets around the clock for risky approvals and drainer contracts, alerts you on Telegram, and prepares the revoke transaction for you to sign.</p>
+            <div class="project-tags"><span>Next.js</span><span>TypeScript</span><span>Express</span><span>Prisma</span><span>PostgreSQL</span><span>Gemini API</span><span>Render</span><span>Vercel</span></div>
+          </a>
+
+          <a class="project-card project-card--new" href="https://somnix-iota.vercel.app/" target="_blank">
+            <div class="project-head">
+              <img src="https://somnix-iota.vercel.app/icon.png" alt="" class="project-favicon">
+              <h3 class="project-title">Somnix</h3>
+              <span class="project-badge">New</span>
+              <svg class="project-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+            </div>
+            <p class="project-description">Call the candle, hide the chart. Lock one Up/Down call per window on Somnia's event contracts, with the price hidden until the timer ends.</p>
+            <div class="project-tags"><span>Next.js</span><span>TypeScript</span><span>viem</span><span>Turso</span><span>Framer Motion</span><span>Vercel</span></div>
+          </a>
+
           <a class="project-card" href="https://royastacks.vercel.app/" target="_blank">
             <div class="project-head">
               <img src="https://royastacks.vercel.app/logo.png" alt="" class="project-favicon">
